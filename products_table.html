@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Table Comparison</title>
+
+<style>
+body 
+{
+  font-family: Arial;
+  background-color: orange;
+  margin: 0;
+}
+
+.header 
+{
+  background-color: black;
+  color: white;
+  padding: 20px;
+  margin: 20px;
+}
+
+.section 
+{
+  margin: 20px;
+  padding: 20px;
+}
+
+.container 
+{
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+}
+
+/* TITLE */
+h2 {
+  text-align: center;
+}
+
+.buttons 
+{
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+button 
+{
+  background-color: orange;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover 
+{
+  background-color: darkorange;
+}
+
+table 
+{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th 
+{
+  background-color: orange;
+  color: black;
+  padding: 10px;
+}
+
+td 
+{
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+#methodUsed 
+{
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+  <h2>Product Table Activity</h2>
+</div>
+
+<div class="section">
+  <div class="container">
+
+    <h2> Product Table Comparison</h2>
+
+    <div class="buttons">
+      <button onclick="loadInnerHTML()">Load using innerHTML</button>
+      <button onclick="loadDOM()">Load using DOM Methods</button>
+      <button onclick="clearTable()">Clear Table</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <div id="methodUsed"></div>
+
+  </div>
+</div>
+
+<script>
+
+const products = [
+  { name: "Burger", price: 25, category: "Food" },
+  { name: "Soda", price: 50, category: "Beverage" },
+  { name: "Chips", price: 30, category: "Food" },
+  { name: "Donut", price: 50, category: "Food" },
+  { name: "Water Bottle", price: 20, category: "Beverage" }
+];
+
+function loadInnerHTML() 
+{
+  let table = document.getElementById("tableBody");
+  table.innerHTML = "";
+
+  let rows = "";
+
+  products.forEach(p => 
+  {
+    rows += `
+      <tr>
+        <td>${p.name}</td>
+        <td>${p.price}</td>
+        <td>${p.category}</td>
+      </tr>
+    `;
+  });
+
+  table.innerHTML = rows;
+  document.getElementById("methodUsed").innerText = "Method Used: innerHTML";
+
+  console.log("Loaded using innerHTML");
+}
+
+function loadDOM() 
+{
+  let table = document.getElementById("tableBody");
+  table.innerHTML = "";
+
+  products.forEach(p => 
+  {
+    let tr = document.createElement("tr");
+
+    let td1 = document.createElement("td");
+    td1.textContent = p.name;
+
+    let td2 = document.createElement("td");
+    td2.textContent = p.price;
+
+    let td3 = document.createElement("td");
+    td3.textContent = p.category;
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+
+    table.appendChild(tr);
+  });
+
+  document.getElementById("methodUsed").innerText = "Method Used: DOM Methods";
+
+  console.log("Loaded using DOM methods");
+}
+
+function clearTable() 
+{
+  document.getElementById("tableBody").innerHTML = "";
+  document.getElementById("methodUsed").innerText = "";
+
+  console.log("Table cleared");
+}
+
+</script>
+
+</body>
+</html>
